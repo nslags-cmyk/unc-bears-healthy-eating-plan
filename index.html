@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UNC Bears Healthy Eating Plan</title>
+  <style>
+    :root {
+      --navy: #0b2341;
+      --gold: #c99700;
+      --gold-soft: #f2e3a0;
+      --cream: #f8f6f0;
+      --ink: #1f2937;
+      --muted: #6b7280;
+      --line: #d1d5db;
+      --success: #0f766e;
+      --card: #ffffff;
+      --shadow: 0 12px 32px rgba(11, 35, 65, 0.10);
+      --radius: 20px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, #f7f8fb 0%, #f2f4f7 100%);
+      line-height: 1.5;
+    }
+
+    .wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #173d6b 100%);
+      color: white;
+      border-radius: 28px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+      margin-top: 16px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: white;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 999px;
+      padding: 8px 14px;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.08;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 0;
+      color: rgba(255,255,255,0.9);
+      font-size: 1.05rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      margin-top: 24px;
+      align-items: start;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+    }
+
+    .card h2, .card h3 {
+      margin-top: 0;
+      color: var(--navy);
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--navy);
+      background: var(--gold-soft);
+      border-radius: 999px;
+      padding: 6px 10px;
+      margin-bottom: 12px;
+    }
+
+    form {
+      display: grid;
+      gap: 16px;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--navy);
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      font-size: 1rem;
+      background: white;
+    }
+
+    input:focus, select:focus {
+      outline: 3px solid rgba(201, 151, 0, 0.22);
+      border-color: var(--gold);
+    }
+
+    .helper {
+      font-size: 0.86rem;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    button, .button-link {
+      appearance: none;
+      border: none;
+      border-radius: 999px;
+      padding: 13px 18px;
+      font-size: 0.98rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+    }
+
+    button:hover, .button-link:hover { transform: translateY(-1px); }
+    button:active, .button-link:active { transform: translateY(0); }
+
+    .primary {
+      background: var(--gold);
+      color: #1b1400;
+      box-shadow: 0 10px 20px rgba(201, 151, 0, 0.2);
+    }
+
+    .secondary {
+      background: white;
+      color: var(--navy);
+      border: 1px solid var(--line);
+    }
+
+    .results-shell {
+      min-height: 300px;
+    }
+
+    .results-placeholder {
+      border: 2px dashed var(--line);
+      border-radius: 18px;
+      padding: 24px;
+      color: var(--muted);
+      background: #fbfcfe;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 18px 0 22px;
+    }
+
+    .metric {
+      border-radius: 18px;
+      padding: 16px;
+      background: linear-gradient(180deg, #fff 0%, #faf8f2 100%);
+      border: 1px solid #eee8d2;
+    }
+
+    .metric .label {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .metric .value {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.1;
+    }
+
+    .metric .sub {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      margin-top: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 580px;
+    }
+
+    th, td {
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid #e8ecf2;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f7f9fc;
+      color: var(--navy);
+      font-size: 0.9rem;
+    }
+
+    .callout {
+      border-left: 4px solid var(--gold);
+      padding: 14px 16px;
+      background: #fffaf0;
+      border-radius: 12px;
+      margin-top: 18px;
+      color: #4b5563;
+    }
+
+    .small-note, .footnotes {
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    .footnotes {
+      margin-top: 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .steps ol {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .steps li { margin: 10px 0; }
+
+    .error {
+      margin-top: 10px;
+      color: #b91c1c;
+      font-weight: 600;
+    }
+
+    .ok {
+      color: var(--success);
+      font-weight: 600;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 28px 0 14px;
+      font-size: 0.88rem;
+    }
+
+    @media (max-width: 900px) {
+      .grid, .field-grid, .metric-grid {
+        grid-template-columns: 1fr;
+      }
+      .wrap { padding: 16px; }
+      .hero, .card { padding: 20px; }
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+      .hero {
+        background: white;
+        color: black;
+        box-shadow: none;
+        border: 2px solid #d1d5db;
+      }
+      .hero p, .brand {
+        color: black;
+        background: none;
+        border: 1px solid #d1d5db;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .card {
+        box-shadow: none;
+        border: 1px solid #d1d5db;
+      }
+      a { color: black; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="brand">🐻 UNC Bears Healthy Eating Plan</div>
+      <h1>Build a personalized food-group plan for your dietary analysis project.</h1>
+      <p>
+        Enter your age, sex, height, weight, and typical physical activity level to estimate a daily calorie target and MyPlate-style food-group goals. Then print or save your results as a PDF for Canvas submission.
+      </p>
+    </section>
+
+    <div class="grid">
+      <section class="card no-print">
+        <div class="section-label">Step 1</div>
+        <h2>Your information</h2>
+        <form id="planForm">
+          <div class="field-grid">
+            <div>
+              <label for="age">Age (years)</label>
+              <input type="number" id="age" min="19" max="80" step="1" placeholder="Example: 21" required />
+              <div class="helper">This version is built for adults ages 19 and older.</div>
+            </div>
+            <div>
+              <label for="sex">Sex</label>
+              <select id="sex" required>
+                <option value="">Select</option>
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-grid">
+            <div>
+              <label for="heightFeet">Height</label>
+              <div class="field-grid" style="grid-template-columns: 1fr 1fr; gap: 10px;">
+                <input type="number" id="heightFeet" min="3" max="8" step="1" placeholder="Feet" required />
+                <input type="number" id="heightInches" min="0" max="11" step="1" placeholder="Inches" required />
+              </div>
+            </div>
+            <div>
+              <label for="weight">Weight (lb)</label>
+              <input type="number" id="weight" min="70" max="500" step="0.1" placeholder="Example: 165" required />
+            </div>
+          </div>
+
+          <div>
+            <label for="activity">Physical activity level</label>
+            <select id="activity" required>
+              <option value="">Select</option>
+              <option value="inactive">Inactive</option>
+              <option value="lowActive">Low active</option>
+              <option value="active">Active</option>
+              <option value="veryActive">Very active</option>
+            </select>
+            <div class="helper">Use your usual daily activity pattern, not your single hardest workout day.</div>
+          </div>
+
+          <div class="btn-row">
+            <button type="submit" class="primary">Calculate plan</button>
+            <button type="button" class="secondary" id="clearBtn">Clear</button>
+          </div>
+          <div id="formMessage" class="error" aria-live="polite"></div>
+        </form>
+      </section>
+
+      <section class="card steps no-print">
+        <div class="section-label">How to use it</div>
+        <h2>Student directions</h2>
+        <ol>
+          <li>Enter your age, sex, height, weight, and activity level.</li>
+          <li>Click <strong>Calculate plan</strong> to generate your estimated calorie level and food-group targets.</li>
+          <li>Review the daily goals and compare them with your 3-day average intake from Cronometer.</li>
+          <li>Click <strong>Print / Save PDF</strong> after your results appear.</li>
+          <li>Upload that PDF with your completed worksheet in Canvas.</li>
+        </ol>
+        <div class="callout">
+          This classroom tool is designed to support dietary analysis assignments. It is not individualized medical nutrition therapy.
+        </div>
+      </section>
+    </div>
+
+    <section class="card results-shell" id="resultsSection">
+      <div class="section-label">Step 2</div>
+      <h2>Your plan</h2>
+      <div id="results" class="results-placeholder">
+        Your personalized calorie estimate and food-group targets will appear here after you calculate your plan.
+      </div>
+    </section>
+
+    <footer>
+      UNC Bears Healthy Eating Plan • built for course use • printable student summary included
+    </footer>
+  </div>
+
+  <script>
+    const foodPatterns = [
+      { calories: 1000, fruits: '1 cup', vegetables: '1 cup', grains: '3 oz-eq', wholeGrains: '1.5 oz-eq', protein: '2 oz-eq', dairy: '2 cups', oils: '15 g' },
+      { calories: 1200, fruits: '1 cup', vegetables: '1.5 cups', grains: '4 oz-eq', wholeGrains: '2 oz-eq', protein: '3 oz-eq', dairy: '2.5 cups', oils: '17 g' },
+      { calories: 1400, fruits: '1.5 cups', vegetables: '1.5 cups', grains: '5 oz-eq', wholeGrains: '2.5 oz-eq', protein: '4 oz-eq', dairy: '2.5 cups', oils: '18 g' },
+      { calories: 1600, fruits: '1.5 cups', vegetables: '2 cups', grains: '5 oz-eq', wholeGrains: '2.5 oz-eq', protein: '5 oz-eq', dairy: '3 cups', oils: '22 g' },
+      { calories: 1800, fruits: '1.5 cups', vegetables: '2.5 cups', grains: '6 oz-eq', wholeGrains: '3 oz-eq', protein: '5 oz-eq', dairy: '3 cups', oils: '24 g' },
+      { calories: 2000, fruits: '2 cups', vegetables: '2.5 cups', grains: '6 oz-eq', wholeGrains: '3 oz-eq', protein: '5.5 oz-eq', dairy: '3 cups', oils: '27 g' },
+      { calories: 2200, fruits: '2 cups', vegetables: '3 cups', grains: '7 oz-eq', wholeGrains: '3.5 oz-eq', protein: '6 oz-eq', dairy: '3 cups', oils: '29 g' },
+      { calories: 2400, fruits: '2 cups', vegetables: '3 cups', grains: '8 oz-eq', wholeGrains: '4 oz-eq', protein: '6.5 oz-eq', dairy: '3 cups', oils: '31 g' },
+      { calories: 2600, fruits: '2 cups', vegetables: '3.5 cups', grains: '9 oz-eq', wholeGrains: '4.5 oz-eq', protein: '6.5 oz-eq', dairy: '3 cups', oils: '34 g' },
+      { calories: 2800, fruits: '2.5 cups', vegetables: '3.5 cups', grains: '10 oz-eq', wholeGrains: '5 oz-eq', protein: '7 oz-eq', dairy: '3 cups', oils: '36 g' },
+      { calories: 3000, fruits: '2.5 cups', vegetables: '4 cups', grains: '10 oz-eq', wholeGrains: '5 oz-eq', protein: '7 oz-eq', dairy: '3 cups', oils: '39 g' },
+      { calories: 3200, fruits: '2.5 cups', vegetables: '4 cups', grains: '10 oz-eq', wholeGrains: '5 oz-eq', protein: '7 oz-eq', dairy: '3 cups', oils: '43 g' }
+    ];
+
+    const activityMap = {
+      female: {
+        inactive: 1.0,
+        lowActive: 1.12,
+        active: 1.27,
+        veryActive: 1.45
+      },
+      male: {
+        inactive: 1.0,
+        lowActive: 1.11,
+        active: 1.25,
+        veryActive: 1.48
+      }
+    };
+
+    function poundsToKg(lb) {
+      return lb * 0.45359237;
+    }
+
+    function feetInchesToMeters(feet, inches) {
+      return ((feet * 12) + inches) * 0.0254;
+    }
+
+    function calculateEER({ age, sex, weightKg, heightM, activity }) {
+      const pa = activityMap[sex][activity];
+      if (sex === 'male') {
+        return 662 - (9.53 * age) + pa * ((15.91 * weightKg) + (539.6 * heightM));
+      }
+      return 354 - (6.91 * age) + pa * ((9.36 * weightKg) + (726 * heightM));
+    }
+
+    function nearestPattern(calories) {
+      return foodPatterns.reduce((prev, curr) => {
+        return Math.abs(curr.calories - calories) < Math.abs(prev.calories - calories) ? curr : prev;
+      });
+    }
+
+    function bmi(weightKg, heightM) {
+      return weightKg / (heightM * heightM);
+    }
+
+    function bmiLabel(bmiValue) {
+      if (bmiValue < 18.5) return 'Below the standard BMI range';
+      if (bmiValue < 25) return 'Within the standard BMI range';
+      if (bmiValue < 30) return 'Above the standard BMI range';
+      return 'Well above the standard BMI range';
+    }
+
+    function niceActivity(activity) {
+      return {
+        inactive: 'Inactive',
+        lowActive: 'Low active',
+        active: 'Active',
+        veryActive: 'Very active'
+      }[activity];
+    }
+
+    function renderResults(data) {
+      const results = document.getElementById('results');
+      const plan = data.plan;
+      results.className = '';
+      results.innerHTML = `
+        <div class="small-note ok">Plan generated successfully. You can now print or save this page as a PDF.</div>
+        <div class="metric-grid">
+          <div class="metric">
+            <div class="label">Estimated calorie need</div>
+            <div class="value">${data.estimatedCalories.toLocaleString()} kcal</div>
+            <div class="sub">Rounded from the adult energy equation</div>
+          </div>
+          <div class="metric">
+            <div class="label">Assigned plan level</div>
+            <div class="value">${plan.calories.toLocaleString()} kcal</div>
+            <div class="sub">Nearest available food-pattern level</div>
+          </div>
+          <div class="metric">
+            <div class="label">Body mass index</div>
+            <div class="value">${data.bmi.toFixed(1)}</div>
+            <div class="sub">${data.bmiText}</div>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Food group</th>
+                <th>Daily target</th>
+                <th>Example note for students</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Fruit</td><td>${plan.fruits}</td><td>Aim for mostly whole fruit.</td></tr>
+              <tr><td>Vegetables</td><td>${plan.vegetables}</td><td>Include variety across colors and types.</td></tr>
+              <tr><td>Grains</td><td>${plan.grains}</td><td>Make at least half whole grains.</td></tr>
+              <tr><td>Whole grains</td><td>${plan.wholeGrains}</td><td>This is the minimum whole-grain portion of the grain target.</td></tr>
+              <tr><td>Protein foods</td><td>${plan.protein}</td><td>Rotate beans, seafood, poultry, eggs, nuts, seeds, and lean meats.</td></tr>
+              <tr><td>Dairy or fortified alternative</td><td>${plan.dairy}</td><td>Choose low-fat, fat-free, or fortified soy alternatives if appropriate.</td></tr>
+              <tr><td>Oils</td><td>${plan.oils}</td><td>Favor unsaturated oils from foods such as nuts, seeds, avocado, and liquid oils.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout">
+          <strong>Your inputs:</strong> ${data.age} years, ${data.sexLabel}, ${data.heightText}, ${data.weightText}, ${data.activityLabel}.<br>
+          <strong>How to submit:</strong> Use the button below or your browser's Print menu to save this page as a PDF, then upload it with your assignment in Canvas.
+        </div>
+
+        <div class="btn-row no-print" style="margin-top: 18px;">
+          <button type="button" class="primary" id="printBtn">Print / Save PDF</button>
+        </div>
+
+        <div class="footnotes">
+          <div><strong>Classroom note:</strong> This tool is intended for adult students ages 19+ and is designed to support educational dietary analysis rather than clinical counseling.</div>
+          <div><strong>Method note:</strong> The calorie estimate uses adult Estimated Energy Requirement equations with sex-specific activity coefficients, then matches the nearest standard food-pattern calorie level.</div>
+          <div><strong>Interpretation note:</strong> Individual needs may differ based on body composition goals, sport, training load, medical history, pregnancy, or other factors.</div>
+        </div>
+      `;
+
+      document.getElementById('printBtn').addEventListener('click', () => window.print());
+      document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    document.getElementById('planForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const message = document.getElementById('formMessage');
+      message.textContent = '';
+
+      const age = Number(document.getElementById('age').value);
+      const sex = document.getElementById('sex').value;
+      const heightFeet = Number(document.getElementById('heightFeet').value);
+      const heightInches = Number(document.getElementById('heightInches').value);
+      const weightLb = Number(document.getElementById('weight').value);
+      const activity = document.getElementById('activity').value;
+
+      if (!age || !sex || Number.isNaN(heightFeet) || Number.isNaN(heightInches) || !weightLb || !activity) {
+        message.textContent = 'Please complete all fields before calculating your plan.';
+        return;
+      }
+
+      if (age < 19) {
+        message.textContent = 'This version is currently set up for adults ages 19 and older.';
+        return;
+      }
+
+      const heightM = feetInchesToMeters(heightFeet, heightInches);
+      const weightKg = poundsToKg(weightLb);
+      const estimatedCalories = Math.round(calculateEER({ age, sex, weightKg, heightM, activity }) / 10) * 10;
+      const plan = nearestPattern(estimatedCalories);
+      const bmiValue = bmi(weightKg, heightM);
+
+      renderResults({
+        age,
+        sexLabel: sex === 'male' ? 'male' : 'female',
+        heightText: `${heightFeet} ft ${heightInches} in`,
+        weightText: `${weightLb.toFixed(1)} lb`,
+        activityLabel: niceActivity(activity),
+        estimatedCalories,
+        plan,
+        bmi: bmiValue,
+        bmiText: bmiLabel(bmiValue)
+      });
+    });
+
+    document.getElementById('clearBtn').addEventListener('click', function () {
+      document.getElementById('planForm').reset();
+      document.getElementById('formMessage').textContent = '';
+      const results = document.getElementById('results');
+      results.className = 'results-placeholder';
+      results.textContent = 'Your personalized calorie estimate and food-group targets will appear here after you calculate your plan.';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
