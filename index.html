@@ -6,532 +6,450 @@
   <title>UNC Bears Healthy Eating Plan</title>
   <style>
     :root {
-      --unc-blue: #013c65;
+      --unc-blue: #003366;
       --unc-gold: #f2a900;
-      --bg: #f7f8fa;
-      --text: #1f2937;
+      --ink: #1f2937;
       --muted: #6b7280;
-      --border: #d1d5db;
-      --card: #ffffff;
-      --fruit: #d93025;
-      --veg: #2e7d32;
-      --grain: #ef6c00;
-      --protein: #6a1b9a;
-      --dairy: #1565c0;
-      --oil: #ad1457;
+      --line: #d1d5db;
+      --panel: #ffffff;
+      --bg: #f8fafc;
     }
+
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
-      color: var(--text);
+      color: var(--ink);
       background: var(--bg);
-      line-height: 1.45;
+      line-height: 1.4;
     }
+
     .wrap {
       max-width: 1100px;
       margin: 0 auto;
       padding: 24px;
     }
-    .hero {
-      background: linear-gradient(135deg, var(--unc-blue), #0d5b90);
-      color: white;
-      border-radius: 18px;
-      padding: 28px;
-      box-shadow: 0 10px 28px rgba(1, 60, 101, 0.18);
+
+    .card {
+      background: var(--panel);
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.06);
+      padding: 24px;
+      margin-bottom: 20px;
     }
-    .hero h1 {
-      margin: 0 0 8px;
-      font-size: 2rem;
-    }
-    .hero p {
-      margin: 0;
-      max-width: 850px;
-    }
+
+    h1, h2, h3 { margin-top: 0; }
+    h1 { color: var(--unc-blue); margin-bottom: 8px; }
+    .sub { color: var(--muted); margin-bottom: 18px; }
+
     .grid {
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 22px;
-      margin-top: 22px;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 16px;
     }
-    .card {
-      background: var(--card);
-      border: 1px solid #e5e7eb;
-      border-radius: 18px;
-      padding: 22px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.05);
-    }
-    h2 {
-      margin: 0 0 14px;
-      color: var(--unc-blue);
-      font-size: 1.3rem;
-    }
-    .subtle { color: var(--muted); font-size: 0.96rem; }
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-    }
-    label {
+
+    .field label {
       display: block;
       font-weight: 700;
       margin-bottom: 6px;
-      font-size: 0.95rem;
     }
-    input, select {
+
+    .field input,
+    .field select {
       width: 100%;
       padding: 10px 12px;
-      border: 1px solid var(--border);
+      border: 1px solid var(--line);
       border-radius: 10px;
-      font-size: 0.98rem;
-      background: white;
+      font-size: 15px;
+      background: #fff;
     }
+
     .actions {
       display: flex;
+      gap: 12px;
       flex-wrap: wrap;
-      gap: 10px;
       margin-top: 18px;
     }
+
     button {
       border: 0;
       border-radius: 12px;
       padding: 12px 16px;
-      font-size: 0.98rem;
+      font-size: 15px;
       font-weight: 700;
       cursor: pointer;
     }
+
     .primary {
-      background: var(--unc-gold);
-      color: #202124;
-    }
-    .secondary {
       background: var(--unc-blue);
       color: white;
     }
-    .ghost {
-      background: #eef2f7;
-      color: var(--unc-blue);
+
+    .secondary {
+      background: var(--unc-gold);
+      color: #111827;
     }
-    .result-banner {
-      display: none;
-      margin-top: 18px;
-      padding: 14px 16px;
-      border-radius: 12px;
-      background: #f3f8fc;
-      border-left: 5px solid var(--unc-blue);
-      font-size: 1rem;
-    }
-    .kpi {
+
+    .result-meta {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 16px;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 16px;
+      margin: 16px 0 20px;
     }
-    .kpi .box {
-      border: 1px solid #e5e7eb;
+
+    .pill {
+      border: 1px solid var(--line);
       border-radius: 14px;
       padding: 14px;
       background: #fff;
     }
-    .kpi .box strong {
-      display: block;
-      font-size: 1.35rem;
-      color: var(--unc-blue);
-      margin-top: 4px;
+
+    .pill .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+    .pill .value { font-size: 24px; font-weight: 700; color: var(--unc-blue); }
+
+    .worksheet-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      font-size: 14px;
     }
-    .note {
-      font-size: 0.9rem;
+
+    .worksheet-table th,
+    .worksheet-table td {
+      border: 1px solid #bfc7d1;
+      vertical-align: top;
+      padding: 10px;
+    }
+
+    .worksheet-table th {
+      background: #eef4fb;
+      text-align: left;
+    }
+
+    .food-cell { width: 28%; }
+    .goal-cell { width: 24%; }
+    .choices-cell { width: 32%; }
+    .check-cell { width: 16%; }
+
+    .group-name {
+      font-weight: 700;
+      color: var(--unc-blue);
+      margin-bottom: 4px;
+    }
+
+    .group-note {
+      font-size: 12px;
       color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .choices-input {
+      width: 100%;
+      min-height: 92px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 8px;
+      font: inherit;
+      resize: vertical;
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          #ffffff 0,
+          #ffffff 21px,
+          #cfd8e3 22px,
+          #ffffff 23px
+        );
+      line-height: 22px;
+    }
+
+    .check-wrap {
+      display: grid;
+      gap: 10px;
+      padding-top: 10px;
+    }
+
+    .check-option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+    }
+
+    .check-option input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--unc-blue);
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 13px;
       margin-top: 12px;
     }
 
-    .plan-sheet {
-      display: none;
-      margin-top: 22px;
-      background: white;
-      border: 1px solid #dadce0;
-      border-radius: 18px;
-      overflow: hidden;
+    .hidden { display: none; }
+
+    @media (max-width: 800px) {
+      .grid, .result-meta { grid-template-columns: 1fr; }
+      .worksheet-table { font-size: 13px; }
     }
-    .plan-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 18px;
-      padding: 20px 22px 10px;
-    }
-    .plan-header h3 {
-      margin: 0;
-      font-size: 1.6rem;
-      color: var(--unc-blue);
-    }
-    .plan-header p {
-      margin: 4px 0 0;
-      color: var(--muted);
-    }
-    .badge {
-      background: #fdf4d7;
-      color: #5c4300;
-      border: 1px solid #f6d57c;
-      border-radius: 999px;
-      padding: 8px 12px;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    .plan-table th, .plan-table td {
-      border: 1px solid #dadce0;
-      padding: 10px 10px;
-      vertical-align: top;
-      font-size: 0.95rem;
-    }
-    .plan-table th {
-      background: #f6f7f8;
-      text-align: left;
-      font-size: 0.9rem;
-    }
-    .food-cell {
-      width: 31%;
-      font-weight: 700;
-    }
-    .target-cell { width: 22%; }
-    .choices-cell { width: 31%; }
-    .goal-cell { width: 16%; }
-    .food-label {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 6px;
-    }
-    .circle {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      color: white;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.82rem;
-      font-weight: 700;
-      flex: 0 0 28px;
-    }
-    .fruit { background: var(--fruit); }
-    .veg { background: var(--veg); }
-    .grain { background: var(--grain); }
-    .protein { background: var(--protein); }
-    .dairy { background: var(--dairy); }
-    .oil { background: var(--oil); }
-    .mini {
-      font-size: 0.86rem;
-      color: var(--muted);
-      font-weight: 400;
-    }
-    .write-lines {
-      min-height: 92px;
-      display: grid;
-      grid-template-rows: repeat(4, 1fr);
-      gap: 8px;
-      padding-top: 2px;
-    }
-    .write-lines span {
-      display: block;
-      border-bottom: 1px solid #8e8e8e;
-      height: 16px;
-    }
-    .checkboxes {
-      min-height: 92px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 12px;
-      font-size: 0.95rem;
-    }
-    .checkboxes .boxline { display: flex; align-items: center; gap: 8px; }
-    .square {
-      width: 16px;
-      height: 16px;
-      border: 1.8px solid #444;
-      display: inline-block;
-    }
-    .footer-notes {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      padding: 14px 18px 20px;
-      color: #4b5563;
-      font-size: 0.88rem;
-    }
-    .footer-notes .footbox {
-      border-top: 1px solid #e5e7eb;
-      padding-top: 10px;
-    }
-    .warn {
-      margin-top: 12px;
-      padding: 12px;
-      background: #fff7ed;
-      color: #9a3412;
-      border: 1px solid #fed7aa;
-      border-radius: 12px;
-      display: none;
-    }
-    @media (max-width: 900px) {
-      .grid, .footer-notes, .kpi { grid-template-columns: 1fr; }
-      .form-grid { grid-template-columns: 1fr; }
-      .plan-header { flex-direction: column; }
-      .plan-table, .plan-table thead, .plan-table tbody, .plan-table tr, .plan-table th, .plan-table td {
-        display: block;
-      }
-      .plan-table thead { display: none; }
-      .plan-table tr { margin-bottom: 14px; border-bottom: 2px solid #d1d5db; }
-      .plan-table td { width: 100% !important; }
-    }
+
     @media print {
       body { background: white; }
-      .hero, .card, .actions, .warn, .result-banner { box-shadow: none; }
-      .grid > .card:first-child, .hero, .actions .ghost { display: none !important; }
-      .wrap { max-width: none; padding: 0; }
-      .grid { display: block; margin-top: 0; }
-      .card { border: 0; padding: 0; }
-      .plan-sheet { display: block !important; border: 0; border-radius: 0; }
-      .footer-notes { page-break-inside: avoid; }
+      .no-print { display: none !important; }
+      .card { box-shadow: none; border: none; padding: 0; }
+      .wrap { max-width: 100%; padding: 0; }
+      .choices-input {
+        border: 1px solid #9ca3af;
+        background:
+          repeating-linear-gradient(
+            to bottom,
+            #ffffff 0,
+            #ffffff 21px,
+            #cfd8e3 22px,
+            #ffffff 23px
+          );
+      }
+      input, textarea, select {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <section class="hero">
+    <div class="card no-print">
       <h1>UNC Bears Healthy Eating Plan</h1>
-      <p>Create a personalized healthy eating plan for adult students. Enter your information, generate your plan, then print or save it as a PDF for your coursework.</p>
-    </section>
+      <div class="sub">Create a personalized healthy eating plan for adult students, then complete the worksheet-style table and print or save as PDF.</div>
 
-    <div class="grid">
-      <section class="card">
-        <h2>Step 1. Enter your information</h2>
-        <p class="subtle">This course tool is designed for adults ages 19 and older. It estimates calorie needs and matches them to a MyPlate-style daily food group plan.</p>
-        <div class="form-grid">
-          <div>
-            <label for="age">Age (years)</label>
-            <input id="age" type="number" min="19" max="99" value="21" />
-          </div>
-          <div>
-            <label for="sex">Sex</label>
-            <select id="sex">
-              <option value="female">Female</option>
-              <option value="male">Male</option>
-            </select>
-          </div>
-          <div>
-            <label for="height">Height (inches)</label>
-            <input id="height" type="number" min="48" max="84" step="0.5" value="66" />
-          </div>
-          <div>
-            <label for="weight">Weight (pounds)</label>
-            <input id="weight" type="number" min="80" max="450" step="0.5" value="150" />
-          </div>
-          <div>
-            <label for="activity">Physical activity level</label>
-            <select id="activity">
-              <option value="sedentary">Sedentary</option>
-              <option value="low_active">Low active</option>
-              <option value="active" selected>Active</option>
-              <option value="very_active">Very active</option>
-            </select>
-          </div>
+      <form id="planForm" class="grid">
+        <div class="field">
+          <label for="age">Age (19+)</label>
+          <input id="age" type="number" min="19" max="80" value="21" required />
         </div>
-        <div class="actions">
-          <button class="primary" id="calcBtn">Generate Healthy Eating Plan</button>
-          <button class="secondary" id="printBtn" type="button">Print / Save PDF</button>
-          <button class="ghost" id="resetBtn" type="button">Reset</button>
+        <div class="field">
+          <label for="sex">Sex</label>
+          <select id="sex" required>
+            <option value="female">Female</option>
+            <option value="male">Male</option>
+          </select>
         </div>
-        <div class="warn" id="warnBox"></div>
-      </section>
+        <div class="field">
+          <label for="height">Height (inches)</label>
+          <input id="height" type="number" min="48" max="84" step="0.5" value="66" required />
+        </div>
+        <div class="field">
+          <label for="weight">Weight (pounds)</label>
+          <input id="weight" type="number" min="70" max="500" step="0.1" value="150" required />
+        </div>
+        <div class="field">
+          <label for="activity">Physical activity level</label>
+          <select id="activity" required>
+            <option value="1.0">Sedentary</option>
+            <option value="1.12">Low active</option>
+            <option value="1.27" selected>Active</option>
+            <option value="1.45">Very active</option>
+          </select>
+        </div>
+      </form>
 
-      <section class="card">
-        <h2>Step 2. Review your plan</h2>
-        <p class="subtle">Your results page includes a worksheet-style column for writing down food choices and a Yes/No checkbox column to mark whether you met each goal.</p>
-        <div class="result-banner" id="resultBanner"></div>
-        <div class="kpi">
-          <div class="box">
-            Estimated calorie level
-            <strong id="calorieDisplay">—</strong>
-          </div>
-          <div class="box">
-            Activity category
-            <strong id="activityDisplay">—</strong>
-          </div>
-        </div>
-        <p class="note">This tool is intended for educational use in class assignments. It is not intended for diagnosis, treatment, or individualized medical nutrition therapy.</p>
-      </section>
+      <div class="actions">
+        <button class="primary" type="button" onclick="generatePlan()">Generate Healthy Eating Plan</button>
+        <button class="secondary" type="button" onclick="window.print()">Print / Save PDF</button>
+      </div>
+      <div class="note">Checkboxes and writing fields are interactive on the webpage. When saved as a PDF, they usually print as shown, but browser-generated PDFs are not always fillable after export.</div>
     </div>
 
-    <section class="plan-sheet" id="planSheet">
-      <div class="plan-header">
-        <div>
-          <h3>UNC Bears Healthy Eating Plan</h3>
-          <p id="studentLine">Personalized daily plan</p>
+    <div id="results" class="card hidden">
+      <h2>Step 2. Compare your intake with your healthy eating plan</h2>
+      <div class="sub">Use the space below to write down foods from each group and mark whether you reached the daily goal.</div>
+
+      <div class="result-meta">
+        <div class="pill">
+          <div class="label">Estimated calorie level</div>
+          <div class="value" id="calorieValue">—</div>
         </div>
-        <div class="badge" id="calorieBadge">— calories/day</div>
+        <div class="pill">
+          <div class="label">Student profile</div>
+          <div class="value" id="profileValue" style="font-size:18px; line-height:1.3;">—</div>
+        </div>
+        <div class="pill">
+          <div class="label">Activity level</div>
+          <div class="value" id="activityValue" style="font-size:18px; line-height:1.3;">—</div>
+        </div>
       </div>
 
-      <table class="plan-table" aria-label="Healthy eating plan worksheet">
+      <table class="worksheet-table">
         <thead>
           <tr>
-            <th class="food-cell">Food group targets for a <span id="calorieHeader">—</span>-calorie pattern</th>
-            <th class="target-cell">Daily target</th>
-            <th class="choices-cell">Write down your food choices for each food group</th>
-            <th class="goal-cell">Did you reach your goal?</th>
+            <th class="food-cell">Food group</th>
+            <th class="goal-cell">Daily goal</th>
+            <th class="choices-cell">Write down your food choices</th>
+            <th class="check-cell">Did you reach your goal?</th>
           </tr>
         </thead>
-        <tbody id="planBody"></tbody>
+        <tbody id="planTableBody"></tbody>
       </table>
 
-      <div class="footer-notes">
-        <div class="footbox">
-          <strong>How to use this page</strong><br>
-          Write examples of foods you ate in the blank lines, then mark Yes or No to compare your intake with your personalized daily target.
-        </div>
-        <div class="footbox">
-          <strong>Educational note</strong><br>
-          This plan is an estimate for classroom use and should be interpreted alongside your diet record and Cronometer output.
-        </div>
-      </div>
-    </section>
+      <div class="note">Tip: complete the text boxes and checkboxes first, then choose Print / Save PDF.</div>
+    </div>
   </div>
 
   <script>
-    const planPatterns = {
-      1600: { fruit: '1.5 cups', veg: '2 cups', grains: '5 oz', whole: 'At least 2.5 oz whole grains', protein: '5 oz', dairy: '3 cups', oils: '5 tsp' },
-      1800: { fruit: '1.5 cups', veg: '2.5 cups', grains: '6 oz', whole: 'At least 3 oz whole grains', protein: '5 oz', dairy: '3 cups', oils: '5 tsp' },
-      2000: { fruit: '2 cups', veg: '2.5 cups', grains: '6 oz', whole: 'At least 3 oz whole grains', protein: '5.5 oz', dairy: '3 cups', oils: '6 tsp' },
-      2200: { fruit: '2 cups', veg: '3 cups', grains: '7 oz', whole: 'At least 3.5 oz whole grains', protein: '6 oz', dairy: '3 cups', oils: '6 tsp' },
-      2400: { fruit: '2 cups', veg: '3 cups', grains: '8 oz', whole: 'At least 4 oz whole grains', protein: '6.5 oz', dairy: '3 cups', oils: '7 tsp' },
-      2600: { fruit: '2 cups', veg: '3.5 cups', grains: '9 oz', whole: 'At least 4.5 oz whole grains', protein: '6.5 oz', dairy: '3 cups', oils: '8 tsp' },
-      2800: { fruit: '2.5 cups', veg: '3.5 cups', grains: '10 oz', whole: 'At least 5 oz whole grains', protein: '7 oz', dairy: '3 cups', oils: '8 tsp' },
-      3000: { fruit: '2.5 cups', veg: '4 cups', grains: '10 oz', whole: 'At least 5 oz whole grains', protein: '7 oz', dairy: '3 cups', oils: '10 tsp' },
-      3200: { fruit: '2.5 cups', veg: '4 cups', grains: '10 oz', whole: 'At least 5 oz whole grains', protein: '7 oz', dairy: '3 cups', oils: '11 tsp' }
+    const foodPlans = {
+      1600: [
+        ["Fruits", "1.5 cups"],
+        ["Vegetables", "2 cups"],
+        ["Grains", "5 ounces (at least 2.5 oz whole grains)"],
+        ["Protein foods", "5 ounces"],
+        ["Dairy", "3 cups"],
+        ["Oils", "5 teaspoons"],
+        ["Limit", "Added sugars < 40 g; saturated fat < 18 g; sodium < 2300 mg"]
+      ],
+      1800: [
+        ["Fruits", "1.5 cups"],
+        ["Vegetables", "2.5 cups"],
+        ["Grains", "6 ounces (at least 3 oz whole grains)"],
+        ["Protein foods", "5 ounces"],
+        ["Dairy", "3 cups"],
+        ["Oils", "5 teaspoons"],
+        ["Limit", "Added sugars < 45 g; saturated fat < 20 g; sodium < 2300 mg"]
+      ],
+      2000: [
+        ["Fruits", "2 cups"],
+        ["Vegetables", "2.5 cups"],
+        ["Grains", "6 ounces (at least 3 oz whole grains)"],
+        ["Protein foods", "5.5 ounces"],
+        ["Dairy", "3 cups"],
+        ["Oils", "6 teaspoons"],
+        ["Limit", "Added sugars < 50 g; saturated fat < 22 g; sodium < 2300 mg"]
+      ],
+      2200: [
+        ["Fruits", "2 cups"],
+        ["Vegetables", "3 cups"],
+        ["Grains", "7 ounces (at least 3.5 oz whole grains)"],
+        ["Protein foods", "6 ounces"],
+        ["Dairy", "3 cups"],
+        ["Oils", "6 teaspoons"],
+        ["Limit", "Added sugars < 55 g; saturated fat < 24 g; sodium < 2300 mg"]
+      ],
+      2400: [
+        ["Fruits", "2 cups"],
+        ["Vegetables", "3 cups"],
+        ["Grains", "8 ounces (at least 4 oz whole grains)"],
+        ["Protein foods", "6.5 ounces"],
+        ["Dairy", "3 cups"],
+        ["Oils", "7 teaspoons"],
+        ["Limit", "Added sugars < 60 g; saturated fat < 27 g; sodium < 2300 mg"]
+      ],
+      2600: [
+        ["Fruits", "2 cups"],
+        ["Vegetables", "3.5 cups"],
+        ["Grains", "9 ounces (at least 4.5 oz whole grains)"],
+        ["Protein foods", "6.5 ounces"],
+        ["Dairy", "3 cups"],
+        ["Oils", "8 teaspoons"],
+        ["Limit", "Added sugars < 65 g; saturated fat < 29 g; sodium < 2300 mg"]
+      ],
+      2800: [
+        ["Fruits", "2.5 cups"],
+        ["Vegetables", "3.5 cups"],
+        ["Grains", "10 ounces (at least 5 oz whole grains)"],
+        ["Protein foods", "7 ounces"],
+        ["Dairy", "3 cups"],
+        ["Oils", "8 teaspoons"],
+        ["Limit", "Added sugars < 70 g; saturated fat < 31 g; sodium < 2300 mg"]
+      ],
+      3000: [
+        ["Fruits", "2.5 cups"],
+        ["Vegetables", "4 cups"],
+        ["Grains", "10 ounces (at least 5 oz whole grains)"],
+        ["Protein foods", "7 ounces"],
+        ["Dairy", "3 cups"],
+        ["Oils", "10 teaspoons"],
+        ["Limit", "Added sugars < 75 g; saturated fat < 33 g; sodium < 2300 mg"]
+      ]
     };
 
-    const rowsMeta = [
-      { key: 'fruit', label: 'Fruits', cls: 'fruit', abbr: 'F', detail: 'Fresh, frozen, canned in juice, or dried fruit all count.' },
-      { key: 'veg', label: 'Vegetables', cls: 'veg', abbr: 'V', detail: 'Include a variety of colors and types across the week.' },
-      { key: 'grains', label: 'Grains', cls: 'grain', abbr: 'G', detail: 'Aim for ' },
-      { key: 'protein', label: 'Protein foods', cls: 'protein', abbr: 'P', detail: 'Includes meat, poultry, seafood, eggs, beans, peas, soy foods, nuts, and seeds.' },
-      { key: 'dairy', label: 'Dairy', cls: 'dairy', abbr: 'D', detail: 'Milk, yogurt, kefir, and fortified soy yogurt all count.' },
-      { key: 'oils', label: 'Oils', cls: 'oil', abbr: 'O', detail: 'Includes liquid oils and oils found in seafood, nuts, seeds, and some dressings.' }
-    ];
-
-    function roundToNearest200(n) {
-      return Math.max(1600, Math.min(3200, Math.round(n / 200) * 200));
+    function roundPlanCalories(value) {
+      const levels = Object.keys(foodPlans).map(Number);
+      return levels.reduce((prev, curr) => Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev);
     }
 
-    function activityFactor(level) {
+    function eerAdult({ sex, age, weightLb, heightIn, activityFactor }) {
+      const weightKg = weightLb / 2.20462;
+      const heightM = heightIn * 0.0254;
+      if (sex === 'male') {
+        return 662 - (9.53 * age) + activityFactor * ((15.91 * weightKg) + (539.6 * heightM));
+      }
+      return 354 - (6.91 * age) + activityFactor * ((9.36 * weightKg) + (726 * heightM));
+    }
+
+    function activityText(value) {
       return {
-        sedentary: 1.2,
-        low_active: 1.375,
-        active: 1.55,
-        very_active: 1.725
-      }[level];
+        '1.0': 'Sedentary',
+        '1.12': 'Low active',
+        '1.27': 'Active',
+        '1.45': 'Very active'
+      }[String(value)] || 'Active';
     }
 
-    function prettyActivity(level) {
-      return {
-        sedentary: 'Sedentary',
-        low_active: 'Low active',
-        active: 'Active',
-        very_active: 'Very active'
-      }[level];
-    }
-
-    function calcCalories({ age, sex, heightIn, weightLb, activity }) {
-      const kg = weightLb / 2.20462;
-      const cm = heightIn * 2.54;
-      const af = activityFactor(activity);
-      const bmr = sex === 'male'
-        ? (10 * kg) + (6.25 * cm) - (5 * age) + 5
-        : (10 * kg) + (6.25 * cm) - (5 * age) - 161;
-      return roundToNearest200(bmr * af);
-    }
-
-    function linesHtml() {
-      return '<div class="write-lines"><span></span><span></span><span></span><span></span></div>';
-    }
-
-    function checksHtml() {
-      return '<div class="checkboxes"><div class="boxline"><span>Yes</span><span class="square"></span></div><div class="boxline"><span>No</span><span class="square"></span></div></div>';
-    }
-
-    function makePlanTable(calories) {
-      const plan = planPatterns[calories] || planPatterns[2000];
-      const tbody = document.getElementById('planBody');
-      tbody.innerHTML = '';
-      rowsMeta.forEach(row => {
-        const tr = document.createElement('tr');
-        let detail = row.detail;
-        if (row.key === 'grains') detail += plan.whole + '.';
-        tr.innerHTML = `
+    function makeRow(name, goal, index) {
+      const safeId = `row_${index}`;
+      return `
+        <tr>
           <td class="food-cell">
-            <div class="food-label"><span class="circle ${row.cls}">${row.abbr}</span><span>${row.label}</span></div>
-            <div class="mini">${detail}</div>
+            <div class="group-name">${name}</div>
+            <div class="group-note">Use this space to compare your 3-day diet record with your plan.</div>
           </td>
-          <td class="target-cell"><strong>${plan[row.key]}</strong></td>
-          <td class="choices-cell">${linesHtml()}</td>
-          <td class="goal-cell">${checksHtml()}</td>
-        `;
-        tbody.appendChild(tr);
-      });
+          <td class="goal-cell"><strong>${goal}</strong></td>
+          <td class="choices-cell">
+            <textarea class="choices-input" aria-label="Write food choices for ${name}" placeholder="Type a few foods here..."></textarea>
+          </td>
+          <td class="check-cell">
+            <div class="check-wrap">
+              <label class="check-option"><input type="checkbox" id="${safeId}_yes" onclick="toggleExclusive('${safeId}','yes')"> Yes</label>
+              <label class="check-option"><input type="checkbox" id="${safeId}_no" onclick="toggleExclusive('${safeId}','no')"> No</label>
+            </div>
+          </td>
+        </tr>`;
+    }
+
+    function toggleExclusive(base, selected) {
+      const yes = document.getElementById(`${base}_yes`);
+      const no = document.getElementById(`${base}_no`);
+      if (selected === 'yes' && yes.checked) no.checked = false;
+      if (selected === 'no' && no.checked) yes.checked = false;
     }
 
     function generatePlan() {
       const age = Number(document.getElementById('age').value);
       const sex = document.getElementById('sex').value;
-      const heightIn = Number(document.getElementById('height').value);
-      const weightLb = Number(document.getElementById('weight').value);
-      const activity = document.getElementById('activity').value;
-      const warn = document.getElementById('warnBox');
-      warn.style.display = 'none';
-      warn.textContent = '';
+      const height = Number(document.getElementById('height').value);
+      const weight = Number(document.getElementById('weight').value);
+      const activity = Number(document.getElementById('activity').value);
 
-      if (!age || !heightIn || !weightLb) {
-        warn.textContent = 'Please enter age, height, and weight before generating the plan.';
-        warn.style.display = 'block';
-        return;
-      }
-      if (age < 19) {
-        warn.textContent = 'This version is designed for adults ages 19 and older.';
-        warn.style.display = 'block';
+      if (!age || !height || !weight || age < 19) {
+        alert('Please enter valid adult values. This version is for ages 19+ only.');
         return;
       }
 
-      const calories = calcCalories({ age, sex, heightIn, weightLb, activity });
-      document.getElementById('calorieDisplay').textContent = `${calories} kcal/day`;
-      document.getElementById('activityDisplay').textContent = prettyActivity(activity);
-      document.getElementById('resultBanner').style.display = 'block';
-      document.getElementById('resultBanner').innerHTML = `Your estimated calorie level is <strong>${calories} calories/day</strong>. Use the worksheet below to compare your intake to your daily targets.`;
-      document.getElementById('planSheet').style.display = 'block';
-      document.getElementById('calorieBadge').textContent = `${calories} calories/day`;
-      document.getElementById('calorieHeader').textContent = calories;
-      document.getElementById('studentLine').textContent = `For a ${age}-year-old ${sex} student, ${heightIn}" and ${weightLb} lb, activity level: ${prettyActivity(activity)}.`;
-      makePlanTable(calories);
-      window.scrollTo({ top: document.getElementById('planSheet').offsetTop - 16, behavior: 'smooth' });
+      const eer = eerAdult({ sex, age, weightLb: weight, heightIn: height, activityFactor: activity });
+      const calorieLevel = roundPlanCalories(eer);
+      const plan = foodPlans[calorieLevel];
+
+      document.getElementById('calorieValue').textContent = `${calorieLevel} kcal/day`;
+      document.getElementById('profileValue').textContent = `${age} y, ${sex}, ${height} in, ${weight} lb`;
+      document.getElementById('activityValue').textContent = activityText(activity);
+
+      const rows = plan.map((item, idx) => makeRow(item[0], item[1], idx)).join('');
+      document.getElementById('planTableBody').innerHTML = rows;
+      document.getElementById('results').classList.remove('hidden');
+      window.scrollTo({ top: document.getElementById('results').offsetTop - 20, behavior: 'smooth' });
     }
-
-    document.getElementById('calcBtn').addEventListener('click', generatePlan);
-    document.getElementById('printBtn').addEventListener('click', () => window.print());
-    document.getElementById('resetBtn').addEventListener('click', () => {
-      document.getElementById('age').value = 21;
-      document.getElementById('sex').value = 'female';
-      document.getElementById('height').value = 66;
-      document.getElementById('weight').value = 150;
-      document.getElementById('activity').value = 'active';
-      document.getElementById('planSheet').style.display = 'none';
-      document.getElementById('resultBanner').style.display = 'none';
-      document.getElementById('warnBox').style.display = 'none';
-      document.getElementById('calorieDisplay').textContent = '—';
-      document.getElementById('activityDisplay').textContent = '—';
-    });
   </script>
 </body>
 </html>
