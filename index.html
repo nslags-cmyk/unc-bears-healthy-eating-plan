@@ -263,6 +263,42 @@
       color: #4b5563;
     }
 
+    .write-lines {
+      min-width: 240px;
+    }
+
+    .line-stack {
+      display: grid;
+      gap: 10px;
+      padding-top: 2px;
+    }
+
+    .line {
+      border-bottom: 1px solid #94a3b8;
+      height: 20px;
+    }
+
+    .checkbox-cell {
+      min-width: 150px;
+      white-space: nowrap;
+    }
+
+    .checkbox-row {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .box {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 1.5px solid #475569;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
     .small-note, .footnotes {
       font-size: 0.86rem;
       color: var(--muted);
@@ -530,17 +566,47 @@
               <tr>
                 <th>Food group</th>
                 <th>Daily target</th>
-                <th>Example note for students</th>
+                <th>Write down a few food choices</th>
+                <th>Did you reach your goal?</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>Fruit</td><td>${plan.fruits}</td><td>Aim for mostly whole fruit.</td></tr>
-              <tr><td>Vegetables</td><td>${plan.vegetables}</td><td>Include variety across colors and types.</td></tr>
-              <tr><td>Grains</td><td>${plan.grains}</td><td>Make at least half whole grains.</td></tr>
-              <tr><td>Whole grains</td><td>${plan.wholeGrains}</td><td>This is the minimum whole-grain portion of the grain target.</td></tr>
-              <tr><td>Protein foods</td><td>${plan.protein}</td><td>Rotate beans, seafood, poultry, eggs, nuts, seeds, and lean meats.</td></tr>
-              <tr><td>Dairy or fortified alternative</td><td>${plan.dairy}</td><td>Choose low-fat, fat-free, or fortified soy alternatives if appropriate.</td></tr>
-              <tr><td>Oils</td><td>${plan.oils}</td><td>Favor unsaturated oils from foods such as nuts, seeds, avocado, and liquid oils.</td></tr>
+              <tr>
+                <td><strong>Fruit</strong></td>
+                <td>${plan.fruits}</td>
+                <td class="write-lines"><div class="line-stack"><div class="line"></div><div class="line"></div><div class="line"></div></div></td>
+                <td class="checkbox-cell"><div class="checkbox-row">Yes <span class="box"></span></div><div class="checkbox-row">No <span class="box"></span></div></td>
+              </tr>
+              <tr>
+                <td><strong>Vegetables</strong></td>
+                <td>${plan.vegetables}</td>
+                <td class="write-lines"><div class="line-stack"><div class="line"></div><div class="line"></div><div class="line"></div></div></td>
+                <td class="checkbox-cell"><div class="checkbox-row">Yes <span class="box"></span></div><div class="checkbox-row">No <span class="box"></span></div></td>
+              </tr>
+              <tr>
+                <td><strong>Grains</strong><br><span class="small-note">At least ${plan.wholeGrains} should be whole grains.</span></td>
+                <td>${plan.grains}</td>
+                <td class="write-lines"><div class="line-stack"><div class="line"></div><div class="line"></div><div class="line"></div></div></td>
+                <td class="checkbox-cell"><div class="checkbox-row">Yes <span class="box"></span></div><div class="checkbox-row">No <span class="box"></span></div></td>
+              </tr>
+              <tr>
+                <td><strong>Protein foods</strong></td>
+                <td>${plan.protein}</td>
+                <td class="write-lines"><div class="line-stack"><div class="line"></div><div class="line"></div><div class="line"></div></div></td>
+                <td class="checkbox-cell"><div class="checkbox-row">Yes <span class="box"></span></div><div class="checkbox-row">No <span class="box"></span></div></td>
+              </tr>
+              <tr>
+                <td><strong>Dairy or fortified alternative</strong></td>
+                <td>${plan.dairy}</td>
+                <td class="write-lines"><div class="line-stack"><div class="line"></div><div class="line"></div><div class="line"></div></div></td>
+                <td class="checkbox-cell"><div class="checkbox-row">Yes <span class="box"></span></div><div class="checkbox-row">No <span class="box"></span></div></td>
+              </tr>
+              <tr>
+                <td><strong>Oils</strong><br><span class="small-note">Use mostly unsaturated oils.</span></td>
+                <td>${plan.oils}</td>
+                <td class="write-lines"><div class="line-stack"><div class="line"></div><div class="line"></div><div class="line"></div></div></td>
+                <td class="checkbox-cell"><div class="checkbox-row">Yes <span class="box"></span></div><div class="checkbox-row">No <span class="box"></span></div></td>
+              </tr>
             </tbody>
           </table>
         </div>
